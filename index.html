@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>テスト太郎 | AI エンジニア</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #020205;
+      --surface: #08080f;
+      --border: #14141f;
+      --accent: #7c3aed;
+      --accent2: #06b6d4;
+      --text: #e2e8f0;
+      --muted: #64748b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Marble background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-color: var(--bg);
+      background-image:
+        /* vein layer 1 – wide diagonal */
+        repeating-linear-gradient(
+          118deg,
+          transparent 0px,
+          transparent 60px,
+          rgba(160,130,200,.07) 60px,
+          rgba(160,130,200,.07) 61px,
+          transparent 61px,
+          transparent 140px,
+          rgba(140,110,180,.05) 140px,
+          rgba(140,110,180,.05) 142px
+        ),
+        /* vein layer 2 – narrow cross-veins */
+        repeating-linear-gradient(
+          47deg,
+          transparent 0px,
+          transparent 90px,
+          rgba(6,182,212,.05) 90px,
+          rgba(6,182,212,.05) 91px,
+          transparent 91px,
+          transparent 200px,
+          rgba(6,182,212,.04) 200px,
+          rgba(6,182,212,.04) 202px
+        ),
+        /* vein layer 3 – subtle cloud wash */
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(124,58,237,.09) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 70%, rgba(6,182,212,.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(80,40,120,.12) 0%, transparent 70%);
+      opacity: 1;
+    }
+
+    /* fine crackle veins via SVG filter */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .55;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='crackle' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.025 0.015' numOctaves='8' seed='7' stitchTiles='stitch' result='noise'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.55 0 0 0 0 0.38 0 0 0 0 0.85 0 0 0 1 0' in='noise' result='tinted'/%3E%3CfeComponentTransfer in='tinted' result='sharp'%3E%3CfeFuncR type='linear' slope='3' intercept='-0.8'/%3E%3CfeFuncG type='linear' slope='3' intercept='-0.8'/%3E%3CfeFuncB type='linear' slope='3' intercept='-0.8'/%3E%3CfeFuncA type='linear' slope='2.5' intercept='-0.6'/%3E%3C/feComponentTransfer%3E%3CfeMorphology operator='erode' radius='0.4' in='sharp' result='thin'/%3E%3C/filter%3E%3Crect width='800' height='800' filter='url(%23crackle)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 800px 800px;
+      mix-blend-mode: screen;
+    }
+
+    /* ── Glow blobs ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .35;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--accent);  top: -200px; left: -200px; }
+    .blob-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -150px; right: -150px; }
+
+    /* ── Layout ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124,58,237,.15);
+      border: 1px solid rgba(124,58,237,.4);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin-bottom: 32px;
+    }
+    .badge-dot {
+      width: 7px; height: 7px;
+      background: #a78bfa;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .4; transform: scale(.7); }
+    }
+
+    /* ── Hero ── */
+    .hero { margin-bottom: 72px; }
+
+    h1 {
+      font-size: clamp(3.5rem, 9vw, 6.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      background: linear-gradient(135deg, #fff 30%, #a78bfa 70%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .title-role {
+      font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 28px;
+      letter-spacing: .05em;
+    }
+    .title-role span {
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #94a3b8;
+      max-width: 560px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 56px 0;
+    }
+
+    /* ── Section heading ── */
+    .section-label {
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    /* ── Skills grid ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 1rem;
+      color: #cbd5e1;
+      transition: border-color .2s, color .2s, transform .2s;
+      cursor: default;
+    }
+    .skill-chip:hover {
+      border-color: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .skill-icon { font-size: 1rem; }
+
+    /* ── Stats row ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: border-color .2s, transform .2s;
+    }
+    .stat-card:hover {
+      border-color: rgba(124,58,237,.5);
+      transform: translateY(-3px);
+    }
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: .8rem; color: var(--muted); }
+
+    /* ── Contact ── */
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .contact-btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #9333ea);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(124,58,237,.4);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 32px rgba(124,58,237,.6); }
+
+    .btn-secondary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 32px;
+      color: var(--muted);
+      font-size: .8rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <main>
+
+    <!-- Badge -->
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Available for Work
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>テスト太郎</h1>
+      <p class="title-role"><span>AI エンジニア</span> &nbsp;/&nbsp; Machine Learning &nbsp;/&nbsp; LLM</p>
+      <p class="hero-desc">
+        AIと機械学習の力でプロダクトを前進させるエンジニアです。
+        大規模言語モデルの設計・実装から本番運用まで、エンドツーエンドで対応します。
+        シンプルで堅牢なシステムを作ることを信条としています。
+      </p>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">ML Models Deployed</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Skills -->
+    <section>
+      <p class="section-label">Tech Stack</p>
+      <div class="skills-grid">
+        <div class="skill-chip"><span class="skill-icon">🤖</span> LLM / RAG</div>
+        <div class="skill-chip"><span class="skill-icon">🐍</span> Python</div>
+        <div class="skill-chip"><span class="skill-icon">🔥</span> PyTorch</div>
+        <div class="skill-chip"><span class="skill-icon">🌊</span> LangChain</div>
+        <div class="skill-chip"><span class="skill-icon">☁️</span> AWS / GCP</div>
+        <div class="skill-chip"><span class="skill-icon">🐳</span> Docker / K8s</div>
+        <div class="skill-chip"><span class="skill-icon">📊</span> MLflow</div>
+        <div class="skill-chip"><span class="skill-icon">⚡</span> FastAPI</div>
+        <div class="skill-chip"><span class="skill-icon">🗄️</span> PostgreSQL</div>
+        <div class="skill-chip"><span class="skill-icon">🔗</span> GitHub Actions</div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Contact -->
+    <section>
+      <p class="section-label">Contact</p>
+      <div class="contact-row">
+        <a href="mailto:taro@example.com" class="contact-btn btn-primary">
+          ✉️ &nbsp;メールを送る
+        </a>
+        <a href="#" class="contact-btn btn-secondary">
+          💼 &nbsp;GitHub
+        </a>
+        <a href="#" class="contact-btn btn-secondary">
+          🐦 &nbsp;X (Twitter)
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2026 テスト太郎 &nbsp;·&nbsp; Built with ❤️ and AI
+  </footer>
+
+</body>
+</html>

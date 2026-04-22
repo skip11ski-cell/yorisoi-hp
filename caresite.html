@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>よりそいケアデザイン｜あなたの暮らしに寄り添う介護サービス</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #fdf8f5;
+      --surface:  #ffffff;
+      --green:    #4caf87;
+      --green-d:  #3a9a74;
+      --green-l:  #e8f7f1;
+      --orange:   #f07c5a;
+      --orange-l: #fef0eb;
+      --text:     #2d2d2d;
+      --sub:      #6b7280;
+      --border:   #e8e0d8;
+      --shadow:   0 4px 24px rgba(0,0,0,.07);
+      --radius:   20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+
+    /* ─── ユーティリティ ─── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .section   { padding: 80px 0; }
+    .section-label {
+      display: inline-block;
+      background: var(--green-l);
+      color: var(--green-d);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--sub);
+      margin-bottom: 48px;
+    }
+
+    /* ─── ヘッダー ─── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253,248,245,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--green-d);
+      letter-spacing: -.01em;
+    }
+    .logo span { color: var(--orange); }
+    .header-tel {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .85rem;
+      color: var(--sub);
+    }
+    .header-tel strong {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: .02em;
+    }
+    .header-tel .tel-icon { font-size: 1.1rem; }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 700;
+      font-size: .9rem;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-cta:hover { background: #e06a47; transform: translateY(-1px); }
+
+    /* ─── ヒーロー ─── */
+    .hero {
+      padding: 88px 0 80px;
+      background: linear-gradient(160deg, #fff 0%, var(--bg) 60%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      /* 背景の装飾円 */
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(76,175,135,.12) 0%, transparent 70%);
+      right: -100px; top: -100px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(240,124,90,.10) 0%, transparent 70%);
+      left: -80px; bottom: -80px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange-l);
+      color: var(--orange);
+      font-size: .8rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -.02em;
+      margin-bottom: 24px;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--green-d);
+      position: relative;
+    }
+    h1 em::after {
+      /* 下線装飾 */
+      content: '';
+      position: absolute;
+      left: 0; bottom: 2px;
+      width: 100%; height: 6px;
+      background: rgba(76,175,135,.25);
+      border-radius: 3px;
+      z-index: -1;
+    }
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 700;
+      color: var(--green-d);
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      color: var(--sub);
+      margin-bottom: 28px;
+      max-width: 520px;
+    }
+    .hero-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .hero-points li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .point-icon {
+      font-size: 1.1rem;
+    }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 32px;
+      border-radius: 999px;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 6px 20px rgba(76,175,135,.35);
+    }
+    .btn-primary:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(76,175,135,.45); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 15px 30px;
+      border-radius: 999px;
+      border: 2px solid var(--border);
+      transition: border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color: var(--green); color: var(--green-d); }
+
+    /* ─── お悩みセクション ─── */
+    .worries { background: var(--surface); }
+    .worry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .worry-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: border-color .2s, transform .2s;
+    }
+    .worry-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+    .worry-icon { font-size: 2rem; margin-bottom: 12px; }
+    .worry-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .worry-card p  { font-size: .875rem; color: var(--sub); }
+
+    /* ─── サービスセクション ─── */
+    .services { background: var(--bg); }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid transparent;
+      transition: border-color .2s, transform .2s;
+    }
+    .service-card:hover { border-color: var(--green); transform: translateY(-4px); }
+    .service-card.accent { border-color: var(--orange); }
+    .service-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .service-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+    .service-card p  { font-size: .9rem; color: var(--sub); }
+
+    /* ─── 料金プラン ─── */
+    .pricing { background: var(--surface); }
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+    .plan-card {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      position: relative;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .plan-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .plan-card.popular {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .plan-card.popular .plan-price,
+    .plan-card.popular .plan-name { color: #fff; }
+    .plan-card.popular .plan-sub,
+    .plan-card.popular .plan-item  { color: rgba(255,255,255,.85); }
+    .popular-badge {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 5px 18px;
+      border-radius: 999px;
+    }
+    .plan-name  { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); margin-bottom: 12px; }
+    .plan-price { font-size: 2.8rem; font-weight: 900; color: var(--text); line-height: 1; }
+    .plan-price sup { font-size: 1rem; vertical-align: super; font-weight: 700; }
+    .plan-price span { font-size: 1rem; font-weight: 400; }
+    .plan-sub   { font-size: .8rem; color: var(--sub); margin-bottom: 24px; margin-top: 4px; }
+    .plan-list  { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .plan-item  { font-size: .875rem; color: var(--sub); display: flex; align-items: flex-start; gap: 8px; }
+    .plan-item::before { content: '✓'; font-weight: 700; color: var(--green); flex-shrink: 0; }
+    .plan-card.popular .plan-item::before { color: rgba(255,255,255,.9); }
+    .btn-plan {
+      display: block;
+      text-align: center;
+      font-weight: 700;
+      font-size: .95rem;
+      padding: 13px;
+      border-radius: 12px;
+      border: 2px solid var(--green);
+      color: var(--green-d);
+      background: transparent;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .btn-plan:hover { background: var(--green); color: #fff; }
+    .plan-card.popular .btn-plan {
+      background: #fff;
+      color: var(--green-d);
+      border-color: #fff;
+    }
+    .plan-card.popular .btn-plan:hover { background: var(--green-l); }
+
+    /* ─── 選ばれる理由 ─── */
+    .reasons { background: var(--bg); }
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .reason-card {
+      display: flex;
+      gap: 18px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+    }
+    .reason-num {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: var(--green-l);
+      color: var(--green-d);
+      font-size: 1.2rem;
+      font-weight: 900;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .reason-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .reason-card p  { font-size: .875rem; color: var(--sub); }
+
+    /* ─── お問い合わせ ─── */
+    .contact { background: var(--green); color: #fff; }
+    .contact .section-label { background: rgba(255,255,255,.2); color: #fff; }
+    .contact .section-title { color: #fff; }
+    .contact .section-sub   { color: rgba(255,255,255,.8); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .contact-tel-box {
+      background: rgba(255,255,255,.15);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      text-align: center;
+    }
+    .contact-tel-box p { font-size: .9rem; margin-bottom: 10px; opacity: .85; }
+    .contact-tel-box .tel-num {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+    .contact-tel-box .tel-hours { font-size: .8rem; opacity: .75; margin-top: 6px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: .85rem; font-weight: 700; margin-bottom: 6px; opacity: .9; }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: none;
+      font-family: inherit;
+      font-size: .95rem;
+      color: var(--text);
+      background: rgba(255,255,255,.95);
+      outline: none;
+      transition: box-shadow .2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { box-shadow: 0 0 0 3px rgba(255,255,255,.4); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-submit:hover { background: #e06a47; transform: translateY(-1px); }
+
+    /* ─── フッター ─── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,.7);
+      padding: 40px 0 24px;
+      font-size: .85rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .footer-logo { font-size: 1.1rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+    .footer-logo span { color: var(--orange); }
+    .footer-info p { margin-bottom: 4px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 8px; }
+    .footer-links a { color: rgba(255,255,255,.6); transition: color .2s; }
+    .footer-links a:hover { color: #fff; }
+    .copyright { border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; text-align: center; }
+
+    /* ─── ご利用の流れ ─── */
+    .flow { background: var(--surface); }
+    .flow-steps {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .flow-step {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+    }
+    .flow-step:hover { border-color: var(--green); transform: translateY(-3px); }
+    .flow-num {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .flow-icon { font-size: 2rem; margin-bottom: 10px; }
+    .flow-step h3 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+    .flow-step p  { font-size: .8rem; color: var(--sub); line-height: 1.7; }
+    .flow-arrow {
+      flex-shrink: 0;
+      font-size: 1.4rem;
+      color: var(--green);
+      font-weight: 700;
+      padding-top: 52px;
+    }
+    @media (max-width: 768px) {
+      .flow-arrow { display: none; }
+      .flow-step  { min-width: calc(50% - 12px); }
+    }
+
+    /* ─── 料金ハイライトバナー ─── */
+    .pricing-highlight {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--orange-l);
+      border: 2px solid rgba(240,124,90,.3);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .plan-pages {
+      background: rgba(76,175,135,.12);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+    .plan-pages-title {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--green-d);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .plan-pages-badge {
+      background: var(--orange);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+    .plan-pages-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding-left: 4px;
+    }
+    .plan-pages-list li {
+      font-size: .82rem;
+      color: var(--sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .plan-pages-list li::before {
+      content: counter(list-item) '.';
+      counter-increment: list-item;
+      font-weight: 700;
+      color: var(--green);
+      font-size: .78rem;
+      min-width: 16px;
+    }
+    .plan-card.popular .plan-pages { background: rgba(255,255,255,.15); }
+    .plan-card.popular .plan-pages-title { color: #fff; }
+    .plan-card.popular .plan-pages-list li { color: rgba(255,255,255,.85); }
+    .plan-card.popular .plan-pages-list li::before { color: rgba(255,255,255,.9); }
+    .plan-note { font-size: .78rem; color: var(--sub); line-height: 1.7; margin-bottom: 16px; }
+    .plan-card.popular .plan-note { color: rgba(255,255,255,.75); }
+    .pricing-highlight-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .pricing-highlight strong { display: block; font-size: 1.1rem; font-weight: 900; color: var(--orange); margin-bottom: 4px; }
+    .pricing-highlight p { font-size: .875rem; color: var(--sub); margin: 0; }
+
+    /* ─── 提供サービス ─── */
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .feature-tag {
+      background: var(--green-l);
+      color: var(--green-d);
+      font-size: .85rem;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(76,175,135,.3);
+    }
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .offer-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      position: relative;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .offer-card:hover {
+      border-color: var(--green);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .offer-card.popular {
+      border-color: var(--orange);
+    }
+    .offer-card.popular:hover { border-color: var(--orange); }
+    .offer-icon {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+    }
+    .offer-badge {
+      display: inline-block;
+      background: var(--green-l);
+      color: var(--green-d);
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .popular-badge-tag {
+      background: var(--orange-l) !important;
+      color: var(--orange) !important;
+    }
+    .offer-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .offer-card p {
+      font-size: .9rem;
+      color: var(--sub);
+      line-height: 1.8;
+    }
+
+    /* ─── フォーム注記 ─── */
+    .form-note {
+      font-size: .8rem;
+      color: rgba(255,255,255,.75);
+      margin: -8px 0 16px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,.1);
+      border-radius: 8px;
+      border-left: 3px solid rgba(255,255,255,.4);
+    }
+
+    /* ─── よくある質問 ─── */
+    .faq { background: var(--surface); }
+    .faq-list { display: flex; flex-direction: column; gap: 16px; }
+    .faq-item {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .faq-item:hover { border-color: var(--green); }
+    .faq-q, .faq-a {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 20px 24px;
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+    .faq-q { font-weight: 700; color: var(--text); border-bottom: 1px solid var(--border); }
+    .faq-a { color: var(--sub); }
+    .faq-badge {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: var(--orange);
+      color: #fff;
+      font-size: .85rem;
+      font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .faq-badge.green { background: var(--green); }
+
+    /* ─── レスポンシブ ─── */
+    @media (max-width: 768px) {
+      .section { padding: 60px 0; }
+      .header-tel strong { font-size: 1rem; }
+      .header-tel .label { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero { padding: 60px 0; }
+    }
+    @media (max-width: 480px) {
+      .btn-cta { display: none; }
+      .hero-btns { flex-direction: column; }
+      .btn-primary, .btn-outline { text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── ヘッダー ─── -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">よりそい<span>ケア</span>デザイン</div>
+      <div class="header-tel">
+        <span class="tel-icon">📞</span>
+        <span class="label">無料相談</span>
+        <strong>050-1793-4141</strong>
+      </div>
+      <a href="#contact" class="btn-cta">無料相談する →</a>
+    </div>
+  </header>
+
+  <!-- ─── ヒーロー ─── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-badge">🤖 介護特化型 AI ホームページ制作</div>
+        <h1>そのやさしさ、<br><em>きちんと伝わっていますか？</em></h1>
+        <p class="hero-tagline">ご家族にも、求職者にも選ばれるホームページへ</p>
+        <p class="hero-sub">
+          寄り添う介護をしている事業所のために、想いと強みを伝え、<br>
+          選ばれるホームページを AI で制作します。
+        </p>
+        <ul class="hero-points">
+          <li><span class="point-icon">✅</span>介護業界に特化したホームページ制作</li>
+          <li><span class="point-icon">✅</span>初回無料相談</li>
+          <li><span class="point-icon">✅</span>最短1週間で納品</li>
+        </ul>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">✉️ 無料相談する（無料）</a>
+          <a href="#services" class="btn-outline">サービスを見る →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── お悩みセクション ─── -->
+  <section class="section worries">
+    <div class="container">
+      <span class="section-label">こんなお悩みはありませんか？</span>
+      <h2 class="section-title">介護事業所のホームページに<br>関するよくあるお悩み</h2>
+      <p class="section-sub">現場を大切にしているからこそ、ホームページまで手が回らない。そんな事業所様を私たちがサポートします。</p>
+      <div class="worry-grid">
+        <div class="worry-card">
+          <div class="worry-icon">✍️</div>
+          <h3>文章を書くのが苦手で、<br>想いをうまく伝えられない</h3>
+          <p>自分たちのケアへの想いや強みはあるのに、言葉にするのが難しく、ページが空白のままになっている。</p>
+        </div>
+        <div class="worry-card">
+          <div class="worry-icon">💸</div>
+          <h3>制作会社に頼むと<br>費用が高すぎる</h3>
+          <p>数十万円の見積もりに驚き、依頼をためらっている。介護事業所の予算に見合うサービスが見つからない。</p>
+        </div>
+        <div class="worry-card">
+          <div class="worry-icon">💰</div>
+          <h3>プロに頼むと<br>費用が高額になる</h3>
+          <p>カメラマンや制作会社への依頼は品質が高い反面、撮影費・デザイン費・修正費が重なり、想定外の出費になりがち。</p>
+        </div>
+        <div class="worry-card">
+          <div class="worry-icon">📊</div>
+          <h3>他の事業所との違いを<br>うまく打ち出せない</h3>
+          <p>ケアの質には自信があるのに、ホームページでは他と同じようなことしか書けていない。</p>
+        </div>
+        <div class="worry-card">
+          <div class="worry-icon">🔄</div>
+          <h3>情報が古いまま放置されて<br>いる</h3>
+          <p>更新の手間がかかり、気づけばサービス内容や採用情報が何年も前のままになっている。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 強みセクション ─── -->
+  <section class="section services" id="services">
+    <div class="container">
+      <span class="section-label">Why AI × 介護特化</span>
+      <h2 class="section-title">介護に特化した AI だから<br>できること</h2>
+      <p class="section-sub">一般的なホームページ制作とは違う、介護事業所のための強みがあります。</p>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-icon">🤝</div>
+          <h3>想いを引き出す<br>丁寧なヒアリング</h3>
+          <p>介護業界を熟知した専任スタッフが、貴事業所のケアへの想い・強み・職場の雰囲気を丁寧に聞き取り。「言葉にできなかった魅力」を AI がデザインに落とし込み、伝わるホームページへ仕上げます。</p>
+        </div>
+        <div class="service-card accent">
+          <div class="service-icon">⚡</div>
+          <h3>最短1週間で<br>公開まで完結</h3>
+          <p>ヒアリングシートへの記入だけで制作がスタート。従来は数ヶ月かかっていた制作期間を、AI の活用で大幅に短縮します。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👨‍👩‍👧</div>
+          <h3>ご家族に選ばれる<br>ページ構成</h3>
+          <p>「どんな想いで介護しているか」「安心して任せられるか」が伝わる構成に。問い合わせや見学予約につながるページを設計します。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💎</div>
+          <h3>制作会社の品質を<br>驚きの低コストで</h3>
+          <p>AI の活用で制作コストを大幅に削減。従来の制作会社の数分の一の価格でご提供します。「安いから妥協」ではなく、「安くても本物」を実現します。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📸</div>
+          <h3>事業所の「本物の写真」が<br>一番の信頼になる</h3>
+          <p>フリー素材では伝わらない、現場の温かさ・スタッフの笑顔・施設の雰囲気。貴事業所からご提供いただいた写真をそのまま活かし、「ここに任せたい」と思ってもらえるリアルな魅力を届けます。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <h3>制作後も安心の<br>更新サポート</h3>
+          <p>スタッフの紹介・イベント情報など、公開後の更新もサポート。情報が古いまま放置されることなく、常に最新の状態を保てます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 提供サービス ─── -->
+  <section class="section reasons">
+    <div class="container">
+      <span class="section-label">Services</span>
+      <h2 class="section-title">提供サービス</h2>
+      <p class="section-sub">介護事業所の「伝えたい想い」をかたちにする、3つのサービスをご用意しています。</p>
+
+      <!-- 特徴タグ -->
+      <div class="feature-tags">
+        <span class="feature-tag">🏥 介護業界に特化</span>
+        <span class="feature-tag">💬 想いを伝える設計</span>
+        <span class="feature-tag">⚡ スピード対応</span>
+      </div>
+
+      <!-- サービスカード -->
+      <div class="offer-grid">
+        <div class="offer-card">
+          <div class="offer-icon">🌐</div>
+          <div class="offer-badge">基本</div>
+          <h3>ホームページ作成</h3>
+          <p>事業所の想い・サービス内容・施設の雰囲気を、ご家族や地域の方に伝わるページとして制作。介護業界に特化した構成で、問い合わせ・見学予約につながるサイトを最短1週間で届けます。</p>
+        </div>
+        <div class="offer-card popular">
+          <div class="offer-icon">➕</div>
+          <div class="offer-badge popular-badge-tag">人気</div>
+          <h3>追加ページ作成</h3>
+          <p>既存サイトへのページ追加にも対応。「スタッフ紹介」「よくある質問」「地域情報」など、必要なコンテンツをスピーディーに制作し、サイトの充実度と信頼感を高めます。</p>
+        </div>
+        <div class="offer-card">
+          <div class="offer-icon">👩‍⚕️</div>
+          <div class="offer-badge">採用強化</div>
+          <h3>採用ページ作成</h3>
+          <p>介護人材の採用難を突破する専用ページ。スタッフの声・職場の雰囲気・働きがいを丁寧に伝え、「ここで働きたい」と思ってもらえる採用サイトを制作します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ご利用の流れ ─── -->
+  <section class="section flow">
+    <div class="container">
+      <span class="section-label">Flow</span>
+      <h2 class="section-title">ご利用の流れ</h2>
+      <p class="section-sub">お申し込みから公開まで、最短1週間。現場のご負担を最小限に進めます。</p>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <div class="flow-icon">📞</div>
+          <h3>無料相談</h3>
+          <p>お電話またはフォームからお気軽にご連絡ください。事業所の状況やご要望をヒアリングします。</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <div class="flow-icon">📝</div>
+          <h3>ヒアリング・<br>内容確認</h3>
+          <p>専任スタッフが事業所の想いや強みを丁寧に聞き取り。簡単なシートへの記入だけで進められます。</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <div class="flow-icon">🤖</div>
+          <h3>AI制作・<br>デザイン</h3>
+          <p>ヒアリング内容をもとに AI がページを制作。介護業界に特化したデザインで仕上げます。</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <div class="flow-icon">✅</div>
+          <h3>確認・修正</h3>
+          <p>完成したページをご確認いただき、気になる箇所を修正。ご満足いただけるまで対応します。</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-num">05</div>
+          <div class="flow-icon">🚀</div>
+          <h3>公開</h3>
+          <p>最短1週間でホームページを公開。公開後も月1回の修正対応で、常に最新の状態を保ちます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 料金プラン ─── -->
+  <section class="section pricing" id="pricing">
+    <div class="container">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title">介護事業所様のための<br>シンプルな料金プラン</h2>
+      <p class="section-sub">初期費用・制作費0円。<br>5ページまで無料で作成し、月額管理費のみで安心してご利用いただけます。</p>
+
+      <!-- 無料作成バナー -->
+      <div class="pricing-highlight">
+        <span class="pricing-highlight-icon">🎁</span>
+        <div>
+          <strong>５ページまで無料で作成</strong>
+          <p>初期費用・制作費は一切かかりません。まずは気軽にお試しください。</p>
+        </div>
+      </div>
+
+      <div class="plan-grid">
+
+        <!-- 月額管理費 -->
+        <div class="plan-card popular">
+          <div class="popular-badge">⭐ 基本プラン</div>
+          <div class="plan-name">月額管理費</div>
+          <div class="plan-price"><sup>月額</sup>¥12,000<span>（税込）</span></div>
+          <p class="plan-sub">5ページ制作費無料＋毎月の運用管理</p>
+          <ul class="plan-list">
+            <li class="plan-item">初回5ページまで無料制作</li>
+          </ul>
+          <div class="plan-pages">
+            <p class="plan-pages-title">基本5ページ <span class="plan-pages-badge">おすすめ</span></p>
+            <ol class="plan-pages-list">
+              <li>トップページ</li>
+              <li>サービス</li>
+              <li>会社概要</li>
+              <li>お問い合わせ</li>
+              <li>ページ自由枠</li>
+            </ol>
+          </div>
+          <ul class="plan-list" style="margin-top:0">
+            <li class="plan-item">ドメイン・サーバー管理</li>
+            <li class="plan-item">セキュリティ・SSL対応</li>
+            <li class="plan-item">スマホ対応レイアウト</li>
+            <li class="plan-item">月１回修正対応</li>
+            <li class="plan-item">初回無料相談つき</li>
+          </ul>
+          <p class="plan-note">※ページ追加は制作費として頂戴します<br>※公開後の軽微な修正は月額管理費内で月1回修正対応可能です</p>
+          <a href="#contact" class="btn-plan">無料相談する</a>
+        </div>
+
+        <!-- 追加ページ -->
+        <div class="plan-card">
+          <div class="plan-name">追加ページ作成</div>
+          <div class="plan-price"><sup>1ページ</sup>¥10,000<span>（税込）</span></div>
+          <p class="plan-sub">6ページ目以降、必要に応じて追加</p>
+          <ul class="plan-list">
+            <li class="plan-item">スタッフ紹介ページ</li>
+            <li class="plan-item">よくある質問ページ</li>
+            <li class="plan-item">ブログ・お知らせページ</li>
+            <li class="plan-item">施設紹介・設備ページ</li>
+          </ul>
+          <a href="#contact" class="btn-plan">追加を相談する</a>
+        </div>
+
+        <!-- 採用ページ -->
+        <div class="plan-card">
+          <div class="plan-name">採用ページ作成</div>
+          <div class="plan-price"><sup>1式</sup>¥15,000<span>（税込）</span></div>
+          <p class="plan-sub">採用に特化した専用ページをまるごと制作</p>
+          <ul class="plan-list">
+            <li class="plan-item">求人情報ページ</li>
+            <li class="plan-item">スタッフインタビュー</li>
+            <li class="plan-item">職場環境・福利厚生紹介</li>
+            <li class="plan-item">応募フォーム設置</li>
+          </ul>
+          <a href="#contact" class="btn-plan">採用強化を相談する</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── よくある質問 ─── -->
+  <section class="section faq">
+    <div class="container">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">よくある質問</h2>
+      <p class="section-sub">お申し込み前に多く寄せられるご質問をまとめました。</p>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q"><span class="faq-badge">Q</span>ホームページ制作は本当に無料ですか？</div>
+          <div class="faq-a"><span class="faq-badge green">A</span>はい、初回5ページまでの制作費は無料です。月額管理費12,000円（税込）のみでご利用いただけます。初期費用を抑えて安心してスタートしていただけます。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span class="faq-badge">Q</span>パソコンやホームページの知識がなくても大丈夫ですか？</div>
+          <div class="faq-a"><span class="faq-badge green">A</span>はい、問題ありません。専門的な内容はすべてこちらで対応いたしますので、初めての方でも安心してご利用いただけます。ヒアリングをもとに、わかりやすくご提案いたします。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span class="faq-badge">Q</span>どのくらいでホームページは完成しますか？</div>
+          <div class="faq-a"><span class="faq-badge green">A</span>内容にもよりますが、最短1週間で公開が可能です。お急ぎの場合もできる限り柔軟に対応いたしますので、お気軽にご相談ください。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span class="faq-badge">Q</span>修正はどこまで対応してもらえますか？</div>
+          <div class="faq-a"><span class="faq-badge green">A</span>月額管理費内で月1回の軽微な修正に対応しています。大幅な変更やページ追加は別途お見積りいたします。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── お問い合わせ ─── -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <span class="section-label">Contact</span>
+      <h2 class="section-title">まずはお気軽に<br>ご相談ください</h2>
+      <p class="section-sub">無料相談受付中。お電話・フォームどちらでもご連絡いただけます。</p>
+      <div class="contact-grid">
+
+        <!-- 電話 -->
+        <div class="contact-tel-box">
+          <p>📞 お電話でのご相談</p>
+          <div class="tel-num">050-1793-4141</div>
+          <p class="tel-hours">受付時間：平日 9:00〜17:00</p>
+          <br>
+          <p style="font-size:.85rem;opacity:.8;">まずはお電話でお気軽にどうぞ。<br>担当者がご状況をお伺いします。</p>
+        </div>
+
+        <!-- フォーム -->
+        <form id="contact-form" onsubmit="return validateForm(event)">
+          <div class="form-group">
+            <label for="name">お名前 <span style="color:rgba(255,255,255,.5);font-weight:400">（必須）</span></label>
+            <input type="text" id="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="form-group">
+            <label for="company">会社名・事業所名 <span style="color:rgba(255,255,255,.5);font-weight:400">（必須）</span></label>
+            <input type="text" id="company" placeholder="〇〇デイサービス" required>
+          </div>
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label for="tel">電話番号</label>
+            <input type="tel" id="tel" placeholder="050-0000-0000">
+          </div>
+          <p class="form-note">※メールアドレスまたは電話番号のいずれかは必ずご入力ください</p>
+          <div class="form-group">
+            <label for="message">お問い合わせ内容 <span style="color:rgba(255,255,255,.5);font-weight:400">（必須）</span></label>
+            <textarea id="message" placeholder="例：ホームページ制作について相談したい。" required></textarea>
+          </div>
+          <p id="form-error" style="display:none;color:#ffe0d6;font-size:.85rem;margin-bottom:12px;">
+            ⚠️ メールアドレスまたは電話番号をいずれかご入力ください。
+          </p>
+          <button type="submit" class="btn-submit">送信する →</button>
+        </form>
+        <script>
+          async function validateForm(e) {
+            e.preventDefault();
+            const name    = document.getElementById('name').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const email   = document.getElementById('email').value.trim();
+            const tel     = document.getElementById('tel').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const errEl   = document.getElementById('form-error');
+            const btn     = e.target.querySelector('.btn-submit');
+
+            if (!email && !tel) {
+              errEl.style.display = 'block';
+              return;
+            }
+            errEl.style.display = 'none';
+            btn.textContent = '送信中…';
+            btn.disabled = true;
+
+            try {
+              const origin = (window.location.origin && window.location.origin !== 'null')
+                ? window.location.origin : 'http://192.168.3.5:3000';
+              const res  = await fetch(origin + '/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, company, email, tel, message }),
+              });
+              const data = await res.json();
+              if (res.ok) {
+                e.target.innerHTML = '<p style="text-align:center;font-size:1.1rem;font-weight:700;padding:32px 0;">✅ 送信しました。<br>担当者よりご連絡いたします。</p>';
+              } else {
+                btn.textContent = '送信する →';
+                btn.disabled = false;
+                alert('エラー: ' + (data.error || '送信に失敗しました。'));
+              }
+            } catch {
+              btn.textContent = '送信する →';
+              btn.disabled = false;
+              alert('通信エラーが発生しました。お電話でもお問い合わせいただけます。');
+            }
+          }
+        </script>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── チャットウィジェット ─── -->
+  <div id="chat-widget">
+
+    <!-- 開閉ボタン -->
+    <button id="chat-toggle" aria-label="チャットを開く">
+      <span id="chat-toggle-icon">💬</span>
+      <span id="chat-toggle-label">相談する</span>
+    </button>
+
+    <!-- チャットウィンドウ -->
+    <div id="chat-window" hidden>
+      <div id="chat-header">
+        <div id="chat-header-info">
+          <div id="chat-avatar">AI</div>
+          <div>
+            <div id="chat-name">よりそいAI</div>
+            <div id="chat-status">● オンライン</div>
+          </div>
+        </div>
+        <button id="chat-close" aria-label="閉じる">✕</button>
+      </div>
+
+      <div id="chat-messages">
+        <div class="chat-msg bot">
+          はじめまして！よりそいケアデザインのAI案内スタッフです🌿<br>
+          料金・サービス・ご利用の流れなど、お気軽にご質問ください。
+        </div>
+      </div>
+
+      <div id="chat-input-area">
+        <textarea id="chat-input" placeholder="メッセージを入力…" rows="1"></textarea>
+        <button id="chat-send" aria-label="送信">→</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* ─── チャットウィジェット ─── */
+    #chat-widget {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+    #chat-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(76,175,135,.45);
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    #chat-toggle:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(76,175,135,.55); }
+    #chat-toggle-icon { font-size: 1.2rem; }
+
+    #chat-window {
+      width: 340px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 48px rgba(0,0,0,.14);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      max-height: 520px;
+    }
+    #chat-window[hidden] { display: none; }
+
+    #chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--green);
+      padding: 14px 16px;
+      color: #fff;
+    }
+    #chat-header-info { display: flex; align-items: center; gap: 10px; }
+    #chat-avatar {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem;
+      font-weight: 900;
+    }
+    #chat-name   { font-weight: 700; font-size: .95rem; }
+    #chat-status { font-size: .72rem; opacity: .85; }
+    #chat-close  {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 4px;
+      opacity: .8;
+      transition: opacity .2s;
+    }
+    #chat-close:hover { opacity: 1; }
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #f8faf9;
+    }
+    .chat-msg {
+      max-width: 82%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: .875rem;
+      line-height: 1.65;
+      word-break: break-word;
+    }
+    .chat-msg.bot {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .chat-msg.user {
+      background: var(--green);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-msg.loading { opacity: .6; font-style: italic; }
+
+    #chat-input-area {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      padding: 12px 14px;
+      border-top: 1px solid #e5e7eb;
+      background: #fff;
+    }
+    #chat-input {
+      flex: 1;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 9px 12px;
+      font-family: inherit;
+      font-size: .875rem;
+      resize: none;
+      outline: none;
+      line-height: 1.5;
+      max-height: 100px;
+      overflow-y: auto;
+      transition: border-color .2s;
+    }
+    #chat-input:focus { border-color: var(--green); }
+    #chat-send {
+      width: 38px; height: 38px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+    #chat-send:hover   { background: var(--green-d); }
+    #chat-send:disabled { background: #ccc; cursor: default; }
+
+    @media (max-width: 480px) {
+      #chat-widget { bottom: 16px; right: 16px; }
+      #chat-window { width: calc(100vw - 32px); }
+    }
+  </style>
+
+  <script>
+    const toggle   = document.getElementById('chat-toggle');
+    const window_  = document.getElementById('chat-window');
+    const closeBtn = document.getElementById('chat-close');
+    const input    = document.getElementById('chat-input');
+    const sendBtn  = document.getElementById('chat-send');
+    const messages = document.getElementById('chat-messages');
+
+    // 会話履歴（Claude API 形式）
+    const history = [];
+
+    // ウィジェット開閉
+    toggle.addEventListener('click', () => {
+      const isOpen = !window_.hidden;
+      window_.hidden = isOpen;
+      document.getElementById('chat-toggle-icon').textContent = isOpen ? '💬' : '✕';
+      document.getElementById('chat-toggle-label').textContent = isOpen ? '相談する' : '閉じる';
+      if (!isOpen) input.focus();
+    });
+    closeBtn.addEventListener('click', () => {
+      window_.hidden = true;
+      document.getElementById('chat-toggle-icon').textContent = '💬';
+      document.getElementById('chat-toggle-label').textContent = '相談する';
+    });
+
+    // メッセージ追加
+    function addMessage(text, role) {
+      const div = document.createElement('div');
+      div.className = `chat-msg ${role}`;
+      div.innerHTML = text.replace(/\n/g, '<br>');
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div;
+    }
+
+    // 送信処理
+    async function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      input.style.height = 'auto';
+      sendBtn.disabled = true;
+
+      addMessage(text, 'user');
+      history.push({ role: 'user', content: text });
+
+      const loadingDiv = addMessage('入力中…', 'bot loading');
+
+      try {
+        const origin = (window.location.origin && window.location.origin !== 'null')
+          ? window.location.origin
+          : 'http://192.168.3.5:3000';
+        const apiUrl = origin + '/api/chat';
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history }),
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        const reply = data.content || data.error || 'エラーが発生しました。';
+        loadingDiv.className = 'chat-msg bot';
+        loadingDiv.innerHTML = reply.replace(/\n/g, '<br>');
+        history.push({ role: 'assistant', content: reply });
+      } catch (err) {
+        loadingDiv.className = 'chat-msg bot';
+        loadingDiv.textContent = '通信エラー: ' + err.message;
+      }
+
+      sendBtn.disabled = false;
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+
+    // テキストエリア自動拡縮
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = input.scrollHeight + 'px';
+    });
+  </script>
+
+  <!-- ─── フッター ─── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">よりそい<span>ケア</span>デザイン</div>
+          <p>〒000-0000 東京都〇〇区〇〇 X-X-X</p>
+          <p>TEL: 050-1793-4141　MAIL: yorisoi.care.design@gmail.com</p>
+          <div class="footer-links">
+            <a href="#">会社概要</a>
+            <a href="#">プライバシーポリシー</a>
+            <a href="#">特定商取引法</a>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <p>受付時間</p>
+          <p style="color:#fff;font-weight:700">平日 9:00〜17:00</p>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 よりそいケアデザイン All Rights Reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
