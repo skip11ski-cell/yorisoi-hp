@@ -1,0 +1,6 @@
+{
+  "functions": {
+    "api/chat.js": { "memory": 256, "maxDuration": 30 },
+    "api/contact.js": { "memory": 256, "maxDuration": 30 }
+  }
+}
